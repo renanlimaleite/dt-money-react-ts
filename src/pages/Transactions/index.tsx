@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { SearchForm } from "../../components/SearchForm";
 import { Summary } from "../../components/Summary";
 import * as S from "./styles";
 
+interface Transactions {
+  id: number;
+  description: string;
+  type: 'income' | 'outcome';
+  price: 'number';
+  category: string;
+  createdAt: string;
+}
+
 export function Transactions() {
+  const [transactions, setTransactions] = useState<Transactions[]>([])
+
+  async function loadTransactions() {
+    const response = await fetch('http://localhost:3333/transactions');
+    const data = await response.json();
+
+    setTransactions(data)
+  }
+
+  useEffect(() => {
+    loadTransactions();
+  }, [])
+
   return (
     <div>
       <Header />
@@ -15,26 +38,20 @@ export function Transactions() {
 
         <S.TransactionsTable>
           <tbody>
-            <tr>
-              <td width="50%">Desenvolvimento de site</td>
-              <td>
-                <S.PriceHighlight variant="income">
-                  R$ 12.000,00
-                </S.PriceHighlight>
-              </td>
-              <td>Venda</td>
-              <td>13/04/2023</td>
-            </tr>
-            <tr>
-              <td width="50%">Hamburguer</td>
-              <td>
-                <S.PriceHighlight variant="outcome">
-                  - R$ 59.00
-                </S.PriceHighlight>
-              </td>
-              <td>Alimentação</td>
-              <td>10/04/2023</td>
-            </tr>
+            {transactions.map(transactions => {
+              return (
+                <tr key={transactions.id}>
+                  <td width="50%">{transactions.description}</td>
+                  <td>
+                    <S.PriceHighlight variant={transactions.type}>
+                      {transactions.price}
+                    </S.PriceHighlight>
+                  </td>
+                  <td>{transactions.category}</td>
+                  <td>{transactions.createdAt}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </S.TransactionsTable>
       </S.TransactionsContainer>
