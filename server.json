@@ -6,7 +6,7 @@
       "type": "income",
       "category": "Venda",
       "price": 14000,
-      "createdAt": "2022-11-16T19:46:08.712Z" 
+      "createdAt": "2022-11-16T19:46:08.712Z"
     },
     {
       "id": 2,
@@ -14,7 +14,23 @@
       "type": "outcome",
       "category": "Alimentação",
       "price": 50,
-      "createdAt": "2022-11-16T19:50:08.712Z" 
+      "createdAt": "2022-11-16T19:50:08.712Z"
+    },
+    {
+      "description": "Desenvolvimento de app",
+      "category": "Venda",
+      "price": 10000,
+      "type": "income",
+      "createdAt": "2022-12-03T21:37:51.375Z",
+      "id": 3
+    },
+    {
+      "description": "Iogurte de banana",
+      "category": "Alimentação",
+      "price": 6,
+      "type": "outcome",
+      "createdAt": "2022-12-03T21:49:29.710Z",
+      "id": 4
     }
   ]
 }
